@@ -4,7 +4,7 @@ import ElementItem from "./element-item";
 import styles from "./index.css";
 import { ElementTypes } from "../../constants";
 
-const elements = [ElementTypes.TEXT, ElementTypes.IMAGE, ElementTypes.PLOTLY];
+const elements = [ElementTypes.TEXT, ElementTypes.IMAGE, ElementTypes.PLOTLY, ElementTypes.CODE];
 const elementWidth = 60;
 const elementHeight = 48;
 const elementMarginRight = 25;

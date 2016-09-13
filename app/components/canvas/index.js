@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { ElementTypes, MODES } from "../../constants";
 import ElementList from "../element-list";
 import Elements from "../../elements";
-import { TextElement, ImageElement, PlotlyElement } from "./element-types";
+import { TextElement, ImageElement, PlotlyElement, CodeElement } from "./element-types";
 import SnapLines from "./snap-lines";
 import * as constraints from "./constraints";
 import Slide from "./slide";
@@ -155,6 +155,8 @@ class SlideList extends Component {
         return ImageElement;
       case ElementTypes.PLOTLY:
         return PlotlyElement;
+      case ElementTypes.CODE:
+        return CodeElement;
       default:
         return null;
     }
