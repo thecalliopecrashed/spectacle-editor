@@ -69,14 +69,15 @@ export default class ColorPicker extends Component {
 
   render() {
     const { currentStyles } = this.props;
-    const rgba = this.getRGBAValues(currentStyles);
+    const color = currentStyles.color || currentStyles.backgroundColor;
+    const rgba = this.getRGBAValues({ opacity: currentStyles.opacity, color });
 
     return (
       <div className={styles.colorWrapper}>
         <div
           onClick={this.handlePickerOpen}
           className={styles.colorPickerTemplateBox}
-          style={{ background: currentStyles.color || currentStyles.backgroundColor || "#fff" }}
+          style={{ background: color || "#fff" }}
         >
         </div>
         <button
