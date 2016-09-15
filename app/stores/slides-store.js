@@ -4,9 +4,11 @@ import Immutable from "seamless-immutable";
 import { generate } from "shortid";
 import { merge, mergeWith, pick, omit } from "lodash";
 
+import pkg from "../package.json";
 import ApiStore from "./api-store";
 import elementMap from "../elements";
 import { getParagraphStyles } from "../utils";
+import migrate from "spectacle-editor-viewer/lib/migrations";
 
 const defaultParagraphStyles = {
   "Heading 1": getParagraphStyles({ fontSize: 26 }),
@@ -125,6 +127,7 @@ export default class SlidesStore {
 
     ipcRenderer.on("trigger-update", () => {
       ipcRenderer.send("update-presentation", {
+        version: pkg.version,
         slides: this.slides,
         paragraphStyles: this.history[this.historyIndex].paragraphStyles,
         currentSlideIndex: this.currentSlideIndex
@@ -483,6 +486,7 @@ export default class SlidesStore {
     });
 
     ipcRenderer.send("update-presentation", {
+      version: pkg.version,
       slides: this.slides,
       paragraphStyles: this.history[this.historyIndex].paragraphStyles,
       currentSlideIndex: this.currentSlideIndex
@@ -491,6 +495,7 @@ export default class SlidesStore {
 
   serialize() {
     return {
+      version: pkg.version,
       slidePreviews: this.slidePreviews,
       slides: this.slides,
       paragraphStyles: this.paragraphStyles
@@ -498,7 +503,8 @@ export default class SlidesStore {
   }
 
   deserialize(newPres) {
-    const { slides, slidePreviews, paragraphStyles } = newPres;
+    const migrated = migrate(newPres);
+    const { slides, slidePreviews, paragraphStyles } = migrated;
     const hydratedSlides = slides.map((slide) => ({
       ...slide,
       children: slide.children.map((childObj) => ({
