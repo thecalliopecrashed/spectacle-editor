@@ -11,7 +11,7 @@ export const ElementTypes = {
   IMAGE: "Image",
   PLOTLY: "Plotly",
   PLOTY_PLACEHOLDER_IMAGE: "Plotly Placeholder",
-  CODE: "Code",
+  CODE: "CodePane",
   QUOTE: "Quote",
   TABLE: "Table",
   IFRAME: "IFrame"
@@ -48,6 +48,33 @@ export const MODES = {
   BOTTOM_LEFT: "BOTTOM_LEFT",
   LEFT: "LEFT",
   MOVE: "MOVE"
+};
+
+export const CodeLanguages = {
+  cpp: "C/C++",
+  cs: "C#",
+  css: "CSS",
+  fsharp: "F#",
+  go: "Go",
+  haskell: "Haskell",
+  java: "Java",
+  javascript: "JavaScript",
+  jsx: "JSX",
+  julia: "Julia",
+  xml: "XML/HTML",
+  matlab: "MATLAB",
+  php: "PHP",
+  python: "Python",
+  r: "R",
+  ruby: "Ruby",
+  scala: "Scala",
+  sql: "SQL",
+  yaml: "YAML"
+};
+
+export const CodeThemes = {
+  tomorrowNight: "Dark",
+  tomorrow: "Light"
 };
 
 export const FontTypes = {

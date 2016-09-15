@@ -101,11 +101,17 @@ elements[ElementTypes.PLOTY_PLACEHOLDER_IMAGE] = {
 elements[ElementTypes.CODE] = {
   type: ElementTypes.CODE,
   ComponentClass: Image,
+  defaultText: "Code",
   props: {
-    src: "http://placehold.it/400x200&text=sliding_yeah",
+    language: "javascript",
+    theme: "tomorrowNight",
     style: {
+      margin: 0,
+      textAlign: "left",
       width: 400,
-      height: 200
+      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+      height: 200,
+      fontSize: 13
     }
   },
   children: []

@@ -7,7 +7,7 @@ import { BLACKLIST_CURRENT_ELEMENT_DESELECT, ElementTypes, MODES } from "../../c
 import styles from "./slide.css";
 import * as constraints from "./constraints";
 import SnapLines from "./snap-lines";
-import { TextElement, ImageElement, PlotlyElement } from "./element-types";
+import { TextElement, ImageElement, PlotlyElement, CodeElement } from "./element-types";
 
 @observer
 class Slide extends Component {
@@ -145,7 +145,7 @@ class Slide extends Component {
 
   handleKeyDown = (e) => {
     // bail if the target is contentEditable
-    if (e.target.contentEditable === "true") return;
+    if (e.target.contentEditable === "true" || e.target.tagName === "TEXTAREA") return;
 
     const currentElement = this.context.store.currentElement;
     if ((e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40) && currentElement) {
@@ -186,6 +186,8 @@ class Slide extends Component {
         return ImageElement;
       case ElementTypes.PLOTLY:
         return PlotlyElement;
+      case ElementTypes.CODE:
+        return CodeElement;
       default:
         return null;
     }

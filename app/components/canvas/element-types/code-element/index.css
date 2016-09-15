@@ -1,0 +1,11 @@
+.editor {
+  padding: 0.5em;
+  font-weight: normal;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  tab-size: 4;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  resize: none;
+}
