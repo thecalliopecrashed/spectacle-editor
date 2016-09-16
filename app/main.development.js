@@ -12,6 +12,13 @@ let promptToSave = false;
 
 app.commandLine.appendSwitch("--ignore-certificate-errors");
 
+const handleRedirect = (webContents, e, url) => {
+  if (url !== webContents.getURL()) {
+    e.preventDefault();
+    shell.openExternal(url);
+  }
+};
+
 const handleSocialAuth = (socialUrl) => {
   const socialLoginWindow = new BrowserWindow({
     show: true,
@@ -113,6 +120,9 @@ const playSlideShow = () => {
   presWindow.on("closed", () => {
     presWindow = null;
   });
+
+  presWindow.webContents.on("will-navigate", handleRedirect.bind(null, presWindow.webContents));
+  presWindow.webContents.on("new-window", handleRedirect.bind(null, presWindow.webContents));
 };
 
 
@@ -179,6 +189,9 @@ app.on("ready", () => {
     mainWindow.show();
     mainWindow.focus();
   });
+
+  mainWindow.webContents.on("will-navigate", handleRedirect.bind(null, mainWindow.webContents));
+  mainWindow.webContents.on("new-window", handleRedirect.bind(null, mainWindow.webContents));
 
   mainWindow.on("close", (ev) => {
     if (promptToSave) {
