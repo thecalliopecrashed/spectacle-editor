@@ -247,15 +247,43 @@ export default class SlidesStore {
   deleteSlide() {
     const slidesArray = this.slides;
     const newParagraphStyles = this.paragraphStyles;
-    const index = this.currentSlideIndex === 0 ? 0 : this.currentSlideIndex - 1;
+    let index = this.currentSlideIndex === 0 ? 0 : this.currentSlideIndex - 1;
 
     slidesArray.splice(this.currentSlideIndex, 1);
+
+    if (!slidesArray.length) {
+      index = 0;
+      slidesArray.splice(0, 0, {
+        id: generate(),
+        props: { style: {}, transition: ["slide"] },
+        children: []
+      });
+    }
 
     transaction(() => {
       this.slidePreviews.splice(this.currentSlideIndex, 1);
       this._addToHistory({
         paragraphStyles: newParagraphStyles,
         currentSlideIndex: index,
+        currentElementIndex: null,
+        slides: slidesArray
+      });
+    });
+  }
+
+  duplicateSlide() {
+    const slidesArray = this.slides;
+    const newParagraphStyles = this.paragraphStyles;
+    const index = this.currentSlideIndex;
+    const currentSlide = Immutable.from(this.currentSlide).asMutable();
+    currentSlide.id = generate();
+    slidesArray.splice(index, 0, currentSlide);
+
+    transaction(() => {
+      this.slidePreviews.splice(index, 0, this.slidePreviews[index]);
+      this._addToHistory({
+        paragraphStyles: newParagraphStyles,
+        currentSlideIndex: index + 1,
         currentElementIndex: null,
         slides: slidesArray
       });

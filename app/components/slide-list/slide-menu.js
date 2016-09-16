@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import { NEWSLIDE, DELETESLIDE } from "../../assets/icons";
+import { NEWSLIDE, DELETESLIDE, DUPLICATE } from "../../assets/icons";
 
 import styles from "./slide-menu.css";
 
@@ -16,6 +16,10 @@ class SlideMenu extends Component {
     this.context.store.deleteSlide();
   }
 
+  onClickDuplicateSlide = () => {
+    this.context.store.duplicateSlide();
+  }
+
   render() {
     return (
       <div className={styles.slideMenu}>
@@ -27,7 +31,17 @@ class SlideMenu extends Component {
             className={styles.icon}
             dangerouslySetInnerHTML={ { __html: NEWSLIDE } }
           />
-          New Slide
+          New
+        </button>
+        <button
+          className={styles.slideButton}
+          onClick={this.onClickDuplicateSlide}
+        >
+          <i
+            className={styles.icon}
+            dangerouslySetInnerHTML={ { __html: DUPLICATE } }
+          />
+          Duplicate
         </button>
         <button
           className={styles.slideButton}
@@ -37,7 +51,7 @@ class SlideMenu extends Component {
             className={styles.icon}
             dangerouslySetInnerHTML={ { __html: DELETESLIDE } }
           />
-          Delete Slide
+          Delete
         </button>
       </div>
     );

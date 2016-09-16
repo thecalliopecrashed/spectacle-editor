@@ -242,6 +242,8 @@ class Slide extends Component {
 
   render() {
     const { store: { currentSlide } } = this.context;
+    if (!currentSlide) return null;
+
     const classes = classNames({
       [styles.slide]: true,
       [styles.isDragging]: this.context.store.isDragging
