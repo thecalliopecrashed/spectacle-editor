@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { ipcRenderer } from "electron";
 
 import { login } from "../../api/user";
-import { testApiUrl } from "../../api/on-premise";
+import { testApiUrl, normalizeDomain } from "../../api/on-premise";
 import styles from "./on-premise-form.css";
 import commonStyles from "./index.css";
 import Spinner from "../../assets/icons/spinner.js";
@@ -107,7 +107,7 @@ class PlotlyForm extends Component {
       return;
     }
 
-    login(this.state.domain, username, password)
+    login(normalizeDomain(this.state.domain), username, password)
       .then(this.onLoginSuccess)
       .catch((errorMessage) => {
         this.setState({ errorMessage });
