@@ -10,5 +10,10 @@ export const testApiUrl = (domain) => {
   const normalizedDomain = normalizeDomain(domain);
 
   return fetch(normalizedDomain)
-    .then((response) => response.text());
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response;
+    });
 };
