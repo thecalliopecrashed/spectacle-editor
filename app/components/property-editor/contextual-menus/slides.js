@@ -81,6 +81,8 @@ export default class SlideMenu extends Component {
   }
 
   render() {
+    if (!this.context.store.currentSlide) return null;
+
     const {
       currentSlide: {
         props: {
