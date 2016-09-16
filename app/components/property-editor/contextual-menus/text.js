@@ -165,7 +165,7 @@ export default class TextMenu extends Component {
                 <div className={styles.breakTitle}>{currentElement.props.paragraphStyle}</div>
               </div>
             </div>
-            <div className={styles.row}>
+            <div className={`${styles.rowSmall}`}>
               <div className={styles.subHeading}>
                 Font
               </div>
