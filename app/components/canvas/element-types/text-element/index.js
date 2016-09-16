@@ -177,6 +177,12 @@ export default class TextElement extends Component {
       this.inputElement.blur();
       this.handleBlur();
     }
+
+    if ((superKey && (e.which === 66 || e.which === 98)) || /* {cmd,ctr}+{b,B}) */
+        (superKey && (e.which === 73 || e.which === 105)) || /* {cmd,ctr}+{i,I})*/
+        (superKey && (e.which === 85 || e.which === 117))) { /* {cmd,ctr}+{u,U})*/
+      e.preventDefault();
+    }
   }
 
   // return an array of string lines, with inner <br>s converted to \n
