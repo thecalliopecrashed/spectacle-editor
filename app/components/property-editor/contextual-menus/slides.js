@@ -130,6 +130,7 @@ export default class SlideMenu extends Component {
             >
               <Option value="cover">Cover</Option>
               <Option value="contain">Contain</Option>
+              <Option value="auto">Original</Option>
               <Option value="100% 100%">Stretch</Option>
             </Select>
           </div>
