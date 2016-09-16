@@ -36,7 +36,7 @@ elements[ElementTypes.TEXT] = {
   // TODO: Figure out defaults for text element
   type: ElementTypes.TEXT,
   ComponentClass: Heading,
-  defaultWidth: 51,
+  defaultWidth: 52,
   defaultHeight: 36,
   defaultText: ["Text"],
   resizeVertical: false,
