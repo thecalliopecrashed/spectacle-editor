@@ -7,6 +7,7 @@ import List from "./list";
 import Select from "./select";
 import Option from "./option";
 import UpdateParagraphStyles from "./updateparagraphstyles";
+import FileUpload from "./fileupload";
 
 export default {
   Alignment,
@@ -17,5 +18,6 @@ export default {
   List,
   Option,
   Select,
-  UpdateParagraphStyles
+  UpdateParagraphStyles,
+  FileUpload
 };

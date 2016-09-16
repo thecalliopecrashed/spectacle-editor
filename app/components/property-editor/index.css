@@ -100,6 +100,10 @@
   z-index: 3;
 }
 
+.rowSmall {
+  margin-bottom: 13px;
+}
+
 .row {
   margin-bottom: 25px;
 }
