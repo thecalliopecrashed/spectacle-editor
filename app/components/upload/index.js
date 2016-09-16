@@ -164,7 +164,7 @@ class UploadButton extends Component {
             <p className={styles.flyoutHeading}>Share your presentation</p>
               <a
                 className={styles.shareLink}
-                href="`${shareLink}`"
+                href={shareLink}
                 target="_blank"
               >
                 {shareLink}
