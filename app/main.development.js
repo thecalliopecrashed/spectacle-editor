@@ -440,15 +440,33 @@ app.on("ready", () => {
       }, {
         label: "Cut",
         accelerator: "Command+X",
-        selector: "cut:"
+        selector: "cut:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "cut");
+          mainWindow.webContents.cut();
+        }
       }, {
         label: "Copy",
         accelerator: "Command+C",
-        selector: "copy:"
+        selector: "copy:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "copy");
+          mainWindow.webContents.copy();
+        }
       }, {
         label: "Paste",
         accelerator: "Command+V",
-        selector: "paste:"
+        selector: "paste:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "paste");
+          mainWindow.webContents.paste();
+        }
       }, {
         label: "Select All",
         accelerator: "Command+A",
@@ -641,17 +659,35 @@ app.on("ready", () => {
       {
         label: "&Cut",
         accelerator: "Ctrl+X",
-        selector: "cut:"
+        selector: "cut:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "cut");
+          mainWindow.webContents.cut();
+        }
       },
       {
         label: "&Copy",
         accelerator: "Ctrl+C",
-        selector: "copy:"
+        selector: "copy:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "copy");
+          mainWindow.webContents.copy();
+        }
       },
       {
         label: "&Paste",
         accelerator: "Ctrl+V",
-        selector: "paste:"
+        selector: "paste:",
+        click() {
+          mainWindow.show();
+          mainWindow.focus();
+          mainWindow.webContents.send("edit", "paste");
+          mainWindow.webContents.paste();
+        }
       },
       {
         label: "&Select All",
