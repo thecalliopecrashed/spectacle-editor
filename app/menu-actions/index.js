@@ -10,6 +10,12 @@ const getFileContent = (slidesStore) => JSON.stringify({
   presentation: slidesStore.serialize()
 });
 
+const isFocusedElementEditable = () => (
+  document.activeElement.tagName === "INPUT" ||
+  document.activeElement.tagName === "TEXTAREA" ||
+  document.activeElement.contentEditable === "true"
+);
+
 const saveFile = (fileName, fileContent, fileStore) => {
   fs.writeFile(fileName, fileContent, (err) => {
     if (err) {
@@ -128,5 +134,17 @@ export const editActions = {
   },
   back: (slidesStore) => {
     slidesStore.setCurrentElementToFrontOrBack();
+  },
+  cut: (slidesStore) => {
+    if (isFocusedElementEditable()) return;
+    slidesStore.cutElement();
+  },
+  copy: (slidesStore) => {
+    if (isFocusedElementEditable()) return;
+    slidesStore.copyElement();
+  },
+  paste: (slidesStore) => {
+    if (isFocusedElementEditable()) return;
+    slidesStore.pasteElement();
   }
 };

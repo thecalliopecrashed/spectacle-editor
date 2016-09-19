@@ -275,7 +275,7 @@ export default class SlidesStore {
     const slidesArray = this.slides;
     const newParagraphStyles = this.paragraphStyles;
     const index = this.currentSlideIndex;
-    const currentSlide = Immutable.from(this.currentSlide).asMutable();
+    const currentSlide = Immutable.from(this.currentSlide).asMutable({ deep: true });
     currentSlide.id = generate();
     slidesArray.splice(index, 0, currentSlide);
 
@@ -287,6 +287,45 @@ export default class SlidesStore {
         currentElementIndex: null,
         slides: slidesArray
       });
+    });
+  }
+
+  copyElement() {
+    if (!this.currentElement) return;
+    this.copiedElement = Immutable.from(this.currentElement).asMutable({ deep: true });
+  }
+
+  cutElement() {
+    this.copyElement();
+    this.deleteCurrentElement();
+  }
+
+  pasteElement() {
+    if (!this.copiedElement) return;
+    const { style } = this.copiedElement.props;
+    this.currentSlide.children.forEach((c) => {
+      if (c.props.style.top === style.top && c.props.style.left === style.left) {
+        style.left += 10;
+        style.top += 10;
+      }
+    });
+
+    const slideToAddTo = this.currentSlide;
+    const newSlidesArray = this.slides;
+    const newParagraphStyles = this.paragraphStyles;
+
+    slideToAddTo.children.push({
+      ...this.copiedElement,
+      id: generate()
+    });
+
+    newSlidesArray[this.currentSlideIndex] = slideToAddTo;
+
+    this._addToHistory({
+      currentSlideIndex: this.currentSlideIndex,
+      currentElementIndex: slideToAddTo.children.length - 1,
+      slides: newSlidesArray,
+      paragraphStyles: newParagraphStyles
     });
   }
 
