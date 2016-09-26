@@ -1,4 +1,4 @@
-const normalizeDomain = (domain) => {
+export const normalizeDomain = (domain) => {
   if (domain.indexOf("http://") === 0 || domain.indexOf("https://") === 0) {
     return domain;
   }
