@@ -9,19 +9,34 @@ const parseJSON = ({ response, text }) => {
   }
 };
 
-export const login = (domain, username, password) => fetch(`${domain}/v2/users/login`, {
-  method: "post",
+function postCreds(domain, username, password, csrfToken) {
+  return fetch(`${domain}/v2/users/login`, {
+    method: "post",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Plotly-Client-Platform": "Python 0.2",
+      "X-CSRFToken": csrfToken
+    },
+    body: JSON.stringify({
+      username,
+      password
+    })
+  });
+}
+
+export const login = (domain, username, password) => fetch(`${domain}/v2/users/current`, {
+  method: "get",
   credentials: "include",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
     "Plotly-Client-Platform": "Python 0.2"
-  },
-  body: JSON.stringify({
-    username,
-    password
-  })
+  }
 })
+.then(res => res.json())
+.then(userInfo => postCreds(domain, username, password, userInfo.csrf_token))
 .then(parseText)
 .then(parseJSON)
 .then(({ response, json }) => {
